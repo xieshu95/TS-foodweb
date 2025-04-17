@@ -1,0 +1,29 @@
+Package: TSfoodweb
+Title: Temperature-size rule under food web dynamics.
+Version: 1.0.0
+Date: 2025-04-01
+Authors@R: c(
+    person(given = "Shu",
+           family = "Xie",
+           role = c("aut","cre"),
+           email = "xieshu95@gmail.com"))
+Description: An evolutionary food web model to illustrate how climate change 
+    drives the adaptive evolution of body size, and how temparature-size dynamics in 
+    turn affect the structure and stability of food web.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 4.2.0)
+Suggests: 
+    testthat (>= 2.1.0),
+    lintr,
+    knitr,
+    rmarkdown
+Imports: 
+    readr,
+    testit
+Remotes:
+URL: https://github.com/xieshu95/TS-foodweb
+BugReports: https://github.com/xieshu95/TS-foodweb/issues
+RoxygenNote: 7.3.2
+VignetteBuilder: knitr
