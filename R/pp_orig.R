@@ -13,8 +13,8 @@ predator_prey_type1 <- function(t, state, parameters) {
   })
 }
 parameters <- c(r = 0.3, a = 0.1, m = 0.4, e = 0.85, K = 20)
-state <- c(N = 2, P = 2)
-times <- seq(0, 200, by = 0.5)
+state <- c(N = 10, P = 10)
+times <- seq(0, 300, by = 0.5)
 
 pp_results = as.data.frame(
   ode(y = state, times = times, func = predator_prey_type1, parms = parameters)

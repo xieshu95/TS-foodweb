@@ -18,18 +18,21 @@ predator_prey_T <- function(t, state, parameters) {
     dP <-  e*a*N*P - m*P
     list(c(dN, dP),
          # Temp = Temp,
+         # dN  = dN,
+         # dP = dP,
          r = r,
          a = a,
          m = m)
   })
 }
-parameters <- c(T0 =300,k = 8.617*10^(-5),n = 0.02, a0 = 10^7, m0 = 10^6, r0 = 0.5*10^7, e = 0.85, K = 20, Ea = 0.6, Em = 0.5,Er = 0.6)
-state <- c(N = 2, P = 2)
+parameters <- c(T0 =300,k = 8.617*10^(-5),n = 0.01, a0 = 10^7, m0 = 10^7, r0 = 10^7, e = 0.85, K = 20, Ea = 0.6, Em = 0.6,Er = 0.6)
+state <- c(N = 10, P = 10)
 times <- seq(0, 10000, by = 1)
 
 pp_results = as.data.frame(
   ode(y = state, times = times, func = predator_prey_T, parms = parameters)
 )
+# pp_results$Temp <- pp_results$Temp - 300
 
 
 pp_results_time = gather(pp_results, Species, Biomass, -time)
@@ -37,12 +40,24 @@ pp_results_time = gather(pp_results, Species, Biomass, -time)
 ggthemr('dust')
 ggplot(data = pp_results_time,aes(time, Biomass, colour = Species)) +
   geom_line(size = 1)+
-  ggplot2::scale_colour_manual("Species",values = c("#FFC839","#4daf4a","#E90F44","#63ADEE","#984ea3"))
+  ggplot2::scale_colour_manual("Species",values = c("#FFC839","#4daf4a","#E90F44","#63ADEE","#984ea3","orange"))
 
 # plot N-P relationships over time
 ggthemr('dust')
 ggplot2::ggplot(pp_results) +
   geom_path(aes(N, P, colour = time), size = 1)+
   scale_color_gradientn(colours = rainbow(6))
+
+T0 =300
+k = 8.617*10^(-5)
+n = 0.01
+a0 = 10^7
+m0 = 10^6
+r0 = 0.5*10^7
+e = 0.85
+K = 20
+Ea = 0.6
+Em = 0.5
+Er = 0.6
 
 
