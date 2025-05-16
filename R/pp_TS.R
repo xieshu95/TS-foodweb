@@ -1,4 +1,4 @@
-# pp_TS衍生，test parameters
+#' temperature-size dependent predator-prey model
 
 library(tidyverse)
 library(deSolve)

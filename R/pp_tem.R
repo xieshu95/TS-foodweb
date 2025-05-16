@@ -1,3 +1,4 @@
+#' temperature dependent predator-prey model
 library(tidyverse)
 library(deSolve)
 library(ggplot2)
@@ -10,8 +11,8 @@ predator_prey_T <- function(t, state, parameters) {
     # update temperature
     Temp <- T0 + n * t
     # temperature-dependent rates
-    a <- a0 * exp(Er *(Temp - T0)/ (k * T0 * Temp))  # Arrhenius公式
-    m <- m0 * exp(Er *(Temp - T0)/ (k * T0 * Temp))
+    a <- a0 * exp(Ea *(Temp - T0)/ (k * T0 * Temp))  # Arrhenius公式
+    m <- m0 * exp(Em *(Temp - T0)/ (k * T0 * Temp))
     r <- r0 * exp(Er *(Temp - T0)/ (k * T0 * Temp))
 
     dN <-  (1 - N/K)*r*N - a*N*P
