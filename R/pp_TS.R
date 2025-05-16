@@ -11,7 +11,7 @@ predator_prey_TS <- function(t, state, parameters) {
     # grouth rate of the prey
     r <- r0 * exp(-Er / (k * Temp)) * z1 ^ pr
     # attack or feeding rate, z1 and z2 are body sizes of prey and predator
-    a <- a0 * exp(-Ea / (k * Temp)) * z1 ^ pa1 * z2 ^ pa1  # Arrhenius公式
+    a <- a0 * exp(-Ea / (k * Temp)) * z1 ^ pa1 * z2 ^ pa2  # Arrhenius公式
     # metabolic rate of the predator
     m <- m0 * exp(-Em / (k * Temp)) * z2 ^ pm
 
@@ -31,12 +31,12 @@ predator_prey_TS <- function(t, state, parameters) {
   })
 }
 parameters <- c(T0 =300,k = 8.617*10^(-5),n = 0.01,
-                a0 = 10^7, m0 = 0.5*10^7, r0 = 10^7,
+                a0 = 10^7, m0 = 1*10^7, r0 = 10^7,
                   e = 0.5, K = 20, Ea = 0.8, Em = 0.8,Er = 0.8,
                 pr = 0.3, pm = 0.3, pa1 = 0.3, pa2 = 0.3,
                 mu1 = 0.5, mu2 = 0.5)
 state <- c(N = 10, P = 10, z1 = 10, z2 = 20)
-times <- seq(0, 20000, by = 1)
+times <- seq(0, 30000, by = 0.2)
 
 pp_results = as.data.frame(
   ode(y = state, times = times, func = predator_prey_TS, parms = parameters)
