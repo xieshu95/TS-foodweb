@@ -5,19 +5,21 @@ library(ggthemr)
 #' original predator-prey ODE without T and size dependence(type I)
 #' N is the biomass of prey and P is the biomass of predator
 #'
-predator_prey_type1 <- function(t, state, parameters) {
-  with(as.list(c(state, parameters)), {
+predator_prey_type1 <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
     dN <-  (1 - N/K)*r*N - a*N*P
     dP <-  e*a*N*P - m*P
-    list(c(dN, dP))
+    list(c(dN, dP),
+         dN = dN,
+         dP = dP)
   })
 }
-parameters <- c(r = 0.3, a = 0.1, m = 0.4, e = 0.85, K = 20)
+parms <- c(r = 0.3, a = 0.1, m = 0.4, e = 0.85, K = 20)
 state <- c(N = 10, P = 10)
-times <- seq(0, 300, by = 0.5)
+times <- seq(0, 100000, by = 1)
 
 pp_results = as.data.frame(
-  ode(y = state, times = times, func = predator_prey_type1, parms = parameters)
+  ode(y = state, times = times, func = predator_prey_type1, parms = parms)
 )
 
 
@@ -39,18 +41,18 @@ ggplot2::ggplot(pp_results) +
 
 
 
-# lotka_volterra <- function(t, state, parameters) {
-#   with(as.list(c(state, parameters)), {
+# lotka_volterra <- function(t, state, parms) {
+#   with(as.list(c(state, parms)), {
 #     dN <-  r*N - a*N*P
 #     dP <-  e*a*N*P - m*P
 #     list(c(dN, dP))
 #   })
 # }
-# parameters <- c(r = 0.3, a = 0.1, m = 0.4, e = 0.5)
+# parms <- c(r = 0.3, a = 0.1, m = 0.4, e = 0.5)
 # state <- c(N = 2, P = 2)
 # times <- seq(0, 100, by = 0.2)
 # sol = as.data.frame(
-#   ode(y = state, times = times, func = lotka_volterra, parms = parameters)
+#   ode(y = state, times = times, func = lotka_volterra, parms = parms)
 # )
 #
 # sol2 = gather(sol, species, individuals, -time)

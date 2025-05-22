@@ -5,8 +5,8 @@ library(deSolve)
 library(ggplot2)
 library(ggthemr)
 
-predator_prey_TS <- function(t, state, parameters) {
-  with(as.list(c(state, parameters)), {
+predator_prey_TS <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
     # update temperature
     Temp <- T0 + n * t
     # temperature-dependent rates
@@ -34,7 +34,7 @@ predator_prey_TS <- function(t, state, parameters) {
     # list(c(dN, dP, dz1, dz2))
   })
 }
-parameters <- c(T0 =300,k = 8.617*10^(-5),n = 0.001,
+parms <- c(T0 =300,k = 8.618*10^(-5),n = 0.001,
                 a0 = 0.5, m0 = 0.3, r0 = 0.6,
                 e = 0.45, K = 100, Ea = 0.6, Em = 0.6,Er = 0.6,
                 pr = -0.25, pm = -0.25, pa1 = -0.25, pa2 = -0.25,
@@ -45,7 +45,7 @@ times <- seq(0, 2000, by = 1)
 
 
 pp_results = as.data.frame(
-  ode(y = state, times = times, func = predator_prey_TS, parms = parameters)
+  ode(y = state, times = times, func = predator_prey_TS, parms = parms)
 )
 
 pp_results1 <- pp_results[,1:5]
@@ -73,9 +73,9 @@ ggplot2::ggplot(pp_results) +
   scale_color_gradientn(colours = rainbow(6))
 
 
-# plot all the other parameters
-predator_prey_TS <- function(t, state, parameters) {
-  with(as.list(c(state, parameters)), {
+# plot all the other parms
+predator_prey_TS <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
     # update temperature
     Temp <- T0 + n * t
     # temperature-dependent rates

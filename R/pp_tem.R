@@ -6,8 +6,8 @@ library(ggthemr)
 #' predator-prey ODE with T dependence but without size dependence(type I)
 #' N is the biomass of prey and P is the biomass of predator
 #'
-predator_prey_T <- function(t, state, parameters) {
-  with(as.list(c(state, parameters)), {
+predator_prey_T <- function(t, state, parms) {
+  with(as.list(c(state, parms)), {
     # update temperature
     Temp <- T0 + n * t
     # temperature-dependent rates
@@ -26,14 +26,14 @@ predator_prey_T <- function(t, state, parameters) {
          # m = m)
   })
 }
-parameters <- c(T0 =300,k = 8.617*10^(-5),n = 0.001,
+parms <- c(T0 =300,k = 8.617*10^(-5),n = 0.001,
                 a0 = 0.5, m0 = 0.3, r0 = 0.6,
                 e = 0.45, K = 100, Ea = 0.6, Em = 0.6,Er = 0.6)
 state <- c(N = 20, P = 20)
 times <- seq(0, 2000, by = 1)
 
 pp_results = as.data.frame(
-  ode(y = state, times = times, func = predator_prey_T, parms = parameters)
+  ode(y = state, times = times, func = predator_prey_T, parms = parms)
 )
 # pp_results$Temp <- pp_results$Temp - 300
 
