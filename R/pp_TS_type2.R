@@ -66,13 +66,13 @@ pp_results = as.data.frame(
 
 pp_results1 <- pp_results[,1:5]
 colnames(pp_results1) <- c("time","BN","BP","SN","SP")
-pp_results_time = gather(pp_results1, Species, Biomass, -time)
+pp_results_time = gather(pp_results1, Species, Population, -time)
 
 pp_results2 <- pp_results[,c(1,10,11)]
-pp_rates_time = gather(pp_results2, Species, Biomass, -time)
+pp_rates_time = gather(pp_results2, Species, Population, -time)
 
 ggthemr('dust')
-ggplot(data = pp_results_time,aes(time, Biomass, colour = Species)) +
+ggplot(data = pp_results_time,aes(time, Population, colour = Species)) +
   geom_line(size = 1)+
   # ylim(0,30)+
   ggplot2::scale_colour_manual("Species",values = c("#FFC839","#4daf4a","#E90F44","#63ADEE","#984ea3","black","grey"))

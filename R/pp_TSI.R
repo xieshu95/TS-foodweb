@@ -3,7 +3,7 @@ library(deSolve)
 library(ggplot2)
 library(ggthemr)
 #' original predator-prey ODE without T and size dependence(type I)
-#' N is the biomass of prey and P is the biomass of predator
+#' N is the Population of prey and P is the Population of predator
 #'
 predator_prey_type1 <- function(t, state, parms) {
   with(as.list(c(state, parms)), {
@@ -23,11 +23,11 @@ pp_results = as.data.frame(
 )
 
 
-pp_results_time = gather(pp_results, Species, Biomass, -time)
+pp_results_time = gather(pp_results, Species, Population, -time)
 
-# plot biomass N and P dynamics over time
+# plot Population N and P dynamics over time
 ggthemr('dust')
-ggplot(data = pp_results_time,aes(time, Biomass, colour = Species)) +
+ggplot(data = pp_results_time,aes(time, Population, colour = Species)) +
   geom_line(size = 1)+
   ggplot2::scale_colour_manual("Species",values = c("#E90F44","#63ADEE"))
 
